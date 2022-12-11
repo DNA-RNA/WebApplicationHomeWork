@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplicationHomeWork.Data;
 
@@ -11,9 +12,11 @@ using WebApplicationHomeWork.Data;
 namespace WebApplicationHomeWork.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20221211215917_addedNewTables")]
+    partial class addedNewTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,27 +42,6 @@ namespace WebApplicationHomeWork.Migrations
                     b.ToTable("departments");
                 });
 
-            modelBuilder.Entity("WebApplicationHomeWork.Models.Duyuru", b =>
-                {
-                    b.Property<int>("DuyuruId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DuyuruId"));
-
-                    b.Property<string>("Icerik")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Konu")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("DuyuruId");
-
-                    b.ToTable("announcements");
-                });
-
             modelBuilder.Entity("WebApplicationHomeWork.Models.Oda", b =>
                 {
                     b.Property<int>("OdaId")
@@ -79,45 +61,16 @@ namespace WebApplicationHomeWork.Migrations
 
                     b.HasIndex("YatakId");
 
-                    b.ToTable("rooms");
-                });
-
-            modelBuilder.Entity("WebApplicationHomeWork.Models.Odeme", b =>
-                {
-                    b.Property<int>("OdemeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OdemeId"));
-
-                    b.Property<string>("Aciklama")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("OdemeTarihi")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("OdemeTipi")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("VeliId")
-                        .HasColumnType("int");
-
-                    b.HasKey("OdemeId");
-
-                    b.HasIndex("VeliId");
-
-                    b.ToTable("payments");
+                    b.ToTable("Oda");
                 });
 
             modelBuilder.Entity("WebApplicationHomeWork.Models.Ogrenci", b =>
                 {
-                    b.Property<int>("OgrenciId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OgrenciId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Ad")
                         .IsRequired()
@@ -125,10 +78,6 @@ namespace WebApplicationHomeWork.Migrations
 
                     b.Property<int>("BolumId")
                         .HasColumnType("int");
-
-                    b.Property<string>("KapiSifre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("KayitTarihi")
                         .HasColumnType("datetime2");
@@ -148,10 +97,6 @@ namespace WebApplicationHomeWork.Migrations
                     b.Property<int>("Role")
                         .HasColumnType("int");
 
-                    b.Property<string>("Sifre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Soyad")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -165,7 +110,7 @@ namespace WebApplicationHomeWork.Migrations
                     b.Property<int>("VeliId")
                         .HasColumnType("int");
 
-                    b.HasKey("OgrenciId");
+                    b.HasKey("Id");
 
                     b.HasIndex("BolumId");
 
@@ -175,30 +120,7 @@ namespace WebApplicationHomeWork.Migrations
 
                     b.HasIndex("VeliId");
 
-                    b.ToTable("students");
-                });
-
-            modelBuilder.Entity("WebApplicationHomeWork.Models.OgrenciSorun", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("OgrenciId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SorunId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OgrenciId");
-
-                    b.HasIndex("SorunId");
-
-                    b.ToTable("studentproblems");
+                    b.ToTable("Ogrenci");
                 });
 
             modelBuilder.Entity("WebApplicationHomeWork.Models.Okul", b =>
@@ -216,27 +138,6 @@ namespace WebApplicationHomeWork.Migrations
                     b.HasKey("OkulId");
 
                     b.ToTable("schools");
-                });
-
-            modelBuilder.Entity("WebApplicationHomeWork.Models.Sorun", b =>
-                {
-                    b.Property<int>("SorunId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SorunId"));
-
-                    b.Property<string>("Icerik")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Konu")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("SorunId");
-
-                    b.ToTable("problems");
                 });
 
             modelBuilder.Entity("WebApplicationHomeWork.Models.Veli", b =>
@@ -259,9 +160,6 @@ namespace WebApplicationHomeWork.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("OdemeId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Role")
                         .HasColumnType("int");
 
@@ -278,8 +176,6 @@ namespace WebApplicationHomeWork.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("VeliId");
-
-                    b.HasIndex("OdemeId");
 
                     b.ToTable("conservator");
                 });
@@ -298,28 +194,7 @@ namespace WebApplicationHomeWork.Migrations
 
                     b.HasKey("YatakId");
 
-                    b.ToTable("beds");
-                });
-
-            modelBuilder.Entity("WebApplicationHomeWork.Models.Yemek", b =>
-                {
-                    b.Property<int>("YemekId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("YemekId"));
-
-                    b.Property<string>("Aciklama")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("YemekTuru")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("YemekId");
-
-                    b.ToTable("foods");
+                    b.ToTable("Yatak");
                 });
 
             modelBuilder.Entity("WebApplicationHomeWork.Models.Oda", b =>
@@ -331,17 +206,6 @@ namespace WebApplicationHomeWork.Migrations
                         .IsRequired();
 
                     b.Navigation("Yatak");
-                });
-
-            modelBuilder.Entity("WebApplicationHomeWork.Models.Odeme", b =>
-                {
-                    b.HasOne("WebApplicationHomeWork.Models.Veli", "Veli")
-                        .WithMany()
-                        .HasForeignKey("VeliId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Veli");
                 });
 
             modelBuilder.Entity("WebApplicationHomeWork.Models.Ogrenci", b =>
@@ -379,32 +243,6 @@ namespace WebApplicationHomeWork.Migrations
                     b.Navigation("Veli");
                 });
 
-            modelBuilder.Entity("WebApplicationHomeWork.Models.OgrenciSorun", b =>
-                {
-                    b.HasOne("WebApplicationHomeWork.Models.Ogrenci", "Ogrenci")
-                        .WithMany()
-                        .HasForeignKey("OgrenciId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WebApplicationHomeWork.Models.Sorun", "Sorun")
-                        .WithMany()
-                        .HasForeignKey("SorunId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Ogrenci");
-
-                    b.Navigation("Sorun");
-                });
-
-            modelBuilder.Entity("WebApplicationHomeWork.Models.Veli", b =>
-                {
-                    b.HasOne("WebApplicationHomeWork.Models.Odeme", null)
-                        .WithMany("Veliler")
-                        .HasForeignKey("OdemeId");
-                });
-
             modelBuilder.Entity("WebApplicationHomeWork.Models.Bolum", b =>
                 {
                     b.Navigation("Ogrenciler");
@@ -413,11 +251,6 @@ namespace WebApplicationHomeWork.Migrations
             modelBuilder.Entity("WebApplicationHomeWork.Models.Oda", b =>
                 {
                     b.Navigation("Ogrenciler");
-                });
-
-            modelBuilder.Entity("WebApplicationHomeWork.Models.Odeme", b =>
-                {
-                    b.Navigation("Veliler");
                 });
 
             modelBuilder.Entity("WebApplicationHomeWork.Models.Okul", b =>
