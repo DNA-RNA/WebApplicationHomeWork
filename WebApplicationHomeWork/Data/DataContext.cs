@@ -23,7 +23,7 @@ namespace WebApplicationHomeWork.Data
             public DbSet<Odeme> payments { get; set; }
             public DbSet<OgrenciSorun> studentproblems{ get; set; }
             public DbSet<Sorun> problems{ get; set; }
-
+            public DbSet<Admin> admins { get; set; }
 
 
 
