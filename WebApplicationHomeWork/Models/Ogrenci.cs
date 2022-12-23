@@ -27,7 +27,8 @@ namespace WebApplicationHomeWork.Models
         public UserRole Role { get; set; }
         public string? TcNo { get; set; }
         public DateTime KayitTarihi { get; set; }
-
+        public string UserName { get; set; }
+        public string Password { get; set; }
         public string? PassportNo { get; set; }
 
     }

@@ -166,6 +166,10 @@ namespace WebApplicationHomeWork.Migrations
                     b.Property<string>("PassportNo")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Role")
                         .HasColumnType("int");
 
@@ -181,6 +185,10 @@ namespace WebApplicationHomeWork.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("TcNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("VeliId")
