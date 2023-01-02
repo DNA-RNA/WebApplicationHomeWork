@@ -44,6 +44,7 @@ namespace WebAppHomeWork.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+           
         }
 
         /// <summary>
@@ -106,6 +107,7 @@ namespace WebAppHomeWork.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+          
         }
 
 
