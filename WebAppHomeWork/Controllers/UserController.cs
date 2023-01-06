@@ -102,14 +102,14 @@ namespace WebAppHomeWork.Controllers
                 return NotFound();
             }
 
-            // Remove the user from all roles
+           
             var userRoles = await _signInManager.UserManager.GetRolesAsync(user);
             if (userRoles.Any())
             {
                 await _signInManager.UserManager.RemoveFromRolesAsync(user, userRoles);
             }
 
-            // Delete the user
+            
             _dataContext.Users.Remove(user);
             _dataContext.SaveChanges();
 
